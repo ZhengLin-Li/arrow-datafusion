@@ -1098,8 +1098,7 @@ mod tests {
         expect_parse_error(sql, "sql parser error: Expected ',' or ')' after partition definition, found: int");
 
         // Error cases: invalid timezone information
-        let sql =
-            "select TIMESTAMP '2023-12-05T21:58:10.45ZZTOP'";
+        let sql = "select TIMESTAMP '2023-12-05T21:58:10.45ZZTOP'";
         expect_parse_error(sql, "Arrow error: Parser error: Invalid timezone \"ZZTOP\": 'ZZTOP' is not a valid timezone");
 
         // positive case: additional options (one entry) can be specified
