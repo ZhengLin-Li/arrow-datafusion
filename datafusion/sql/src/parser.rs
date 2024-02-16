@@ -1097,6 +1097,11 @@ mod tests {
             "CREATE EXTERNAL TABLE t(c1 int) STORED AS CSV PARTITIONED BY (p1 int) LOCATION 'foo.csv'";
         expect_parse_error(sql, "sql parser error: Expected ',' or ')' after partition definition, found: int");
 
+        // Error cases: invalid timezone information
+        let sql =
+            "select TIMESTAMP '2023-12-05T21:58:10.45ZZTOP'";
+        expect_parse_error(sql, "Arrow error: Parser error: Invalid timezone \"ZZTOP\": 'ZZTOP' is not a valid timezone");
+
         // positive case: additional options (one entry) can be specified
         let sql =
             "CREATE EXTERNAL TABLE t STORED AS x OPTIONS ('k1' 'v1') LOCATION 'blahblah'";
